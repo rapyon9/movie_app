@@ -1,6 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Movie.css";
+
+function RenderingSummary(summary) {
+    let summaryLength = summary.length;
+    if (summaryLength > 180) {
+        summary = `${summary.slice(0, 180)}...`
+    } else {
+        summary = summary
+    }
+    return summary;
+}
 
 function Movie({ year, title, summary, poster, genres }) {
     return (
@@ -9,7 +18,7 @@ function Movie({ year, title, summary, poster, genres }) {
             <div className="movie__data">
                 <h3 className="movie__title">{title}</h3>
                 <h5 className="movie__year">{year}</h5>
-                <ul className="genres">
+                <ul className="movie__genres">
                     {
                         genres.map((genre, index) => (
                             <li key={index} className="genres__genre">
@@ -18,7 +27,7 @@ function Movie({ year, title, summary, poster, genres }) {
                         ))
                     }
                 </ul>
-                <p className="movie__summary">{summary}</p>
+                <p className="movie__summary">{RenderingSummary(summary)}</p>
             </div>
         </div>
     );
